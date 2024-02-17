@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recognition Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Recognition Result</h2>
+        {% if recognized_faces %}
+            <p class="success">Faces recognized successfully!</p>
+            <ul>
+                {% for face in recognized_faces %}
+                    {% if face != 'Unknown' %}
+                        <li>Name: {{ face['Name'] }}</li>
+                        <li>In Time: {{ face['In Time'] }}</li>
+                        {% if face['Out Time'] %}
+                            <li>Out Time: {{ face['Out Time'] }}</li>
+                            <li>Time Spent: {{ face['Time Spent'] }}</li>
+                        {% endif %}
+                    {% else %}
+                        <li class="error">You are not registered. Contact supervisor.</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="error">Failed to recognize faces!</p>
+        {% endif %}
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>
