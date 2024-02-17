@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h2>Registration</h2>
+    <form action="{{ url_for('registration') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit" id="loginBtn">Login</button>
+        <div id="hiddenFields" style="display: none;">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" required><br><br>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("loginBtn").addEventListener("click", function(event) {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if (username !== "hod" || password !== "cse") {
+                event.preventDefault();
+                alert("Invalid credentials!");
+            } else {
+                var hiddenFields = document.getElementById("hiddenFields");
+                hiddenFields.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
